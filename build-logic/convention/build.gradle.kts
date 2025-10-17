@@ -20,5 +20,9 @@ gradlePlugin {
             id = libs.plugins.app.get().pluginId
             implementationClass = "AppPlugin"
         }
+        register("modulePlugin") {
+            id = libs.plugins.module.get().pluginId
+            implementationClass = "ModulePlugin"
+        }
     }
 }

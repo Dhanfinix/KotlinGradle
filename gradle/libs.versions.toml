@@ -40,6 +40,7 @@ konvert-processor = { group = "io.mcarle", name = "konvert-processor", version.r
 [plugins]
 # convention plugin used on build.gradle of a module
 app = {id = "kotlin.gradle.app"}
+module = {id = "kotlin.gradle.module"}
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
