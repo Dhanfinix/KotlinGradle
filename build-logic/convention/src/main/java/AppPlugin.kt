@@ -17,9 +17,6 @@ open class AppPlugin: Plugin<Project> {
             commonPlugin(isApp = isApp)
             extensions.configure<ApplicationExtension> {
                 commonConfig(this, enableFlavorSpecificValue)
-                buildFeatures {
-                    compose = true
-                }
                 defaultConfig.apply {
                     targetSdk = compileTargetSdk
                     versionName = "$APPS_VERSION"

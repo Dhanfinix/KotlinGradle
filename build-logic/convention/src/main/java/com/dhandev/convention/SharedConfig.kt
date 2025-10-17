@@ -50,6 +50,7 @@ internal fun Project.commonConfig(
         }
 
         buildFeatures {
+            compose = true
             buildConfig = true
         }
 

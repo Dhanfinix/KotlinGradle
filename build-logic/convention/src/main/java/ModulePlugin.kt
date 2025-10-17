@@ -15,9 +15,6 @@ open class ModulePlugin: AppPlugin() {
             commonPlugin(isApp)
             extensions.configure<LibraryExtension> {
                 commonConfig(this, enableFlavorSpecificValue)
-                buildFeatures {
-                    compose = true
-                }
                 defaultConfig.apply {
                     targetSdk = compileTargetSdk
                     consumerProguardFiles("consumer-rules.pro")
