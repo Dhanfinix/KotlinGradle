@@ -21,4 +21,7 @@ dependencyResolutionManagement {
 
 rootProject.name = "Kotlin Gradle"
 include(":app")
- 
+include(":core:data")
+include(":core:domain")
+include(":feature:home")
+include(":feature:detail")

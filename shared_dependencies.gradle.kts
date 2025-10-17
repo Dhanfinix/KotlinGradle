@@ -4,8 +4,6 @@ plugins {
     alias(libs.plugins.kotlin.compose)
 }
 
-//apply { from("../shared_dependencies.gradle.kts") }
-
 android {
     namespace = "com.dhandev.kotlingradle"
     compileSdk {
