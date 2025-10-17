@@ -9,12 +9,11 @@ import org.gradle.kotlin.dsl.configure
 /** Plugin for feature module */
 open class ModulePlugin: AppPlugin() {
     override val isApp = false
-    override val enableFlavorSpecificValue = false
     override fun apply(target: Project) {
         with(target) {
             commonPlugin(isApp)
             extensions.configure<LibraryExtension> {
-                commonConfig(this, enableFlavorSpecificValue)
+                commonConfig(this)
                 defaultConfig.apply {
                     targetSdk = compileTargetSdk
                     consumerProguardFiles("consumer-rules.pro")
@@ -22,7 +21,7 @@ open class ModulePlugin: AppPlugin() {
                 buildTypes {
                     release {
                         isMinifyEnabled = false // only app module need this to be true
-                            signingConfigs.getByName(RELEASE.toString())
+                        signingConfigs.getByName(RELEASE.toString())
                         proguardFiles(
                             getDefaultProguardFile("proguard-android-optimize.txt"),
                             "proguard-rules.pro"

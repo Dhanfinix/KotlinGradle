@@ -11,12 +11,11 @@ import org.gradle.kotlin.dsl.configure
 /** Plugin for App module */
 open class AppPlugin: Plugin<Project> {
     open val isApp = true
-    open val enableFlavorSpecificValue = true
     override fun apply(target: Project) {
         with(target) {
             commonPlugin(isApp = isApp)
             extensions.configure<ApplicationExtension> {
-                commonConfig(this, enableFlavorSpecificValue)
+                commonConfig(this)
                 defaultConfig.apply {
                     targetSdk = compileTargetSdk
                     versionName = "$APPS_VERSION"

@@ -34,7 +34,6 @@ internal fun Project.commonPlugin(
 /** Set common configuration for App module and feature module **/
 internal fun Project.commonConfig(
     commonExtension: CommonExtension<*, *, *, *, *, *>,
-    enableFlavorSpecificValue: Boolean
 ) {
     commonExtension.apply {
         compileSdk = compileTargetSdk
@@ -59,9 +58,7 @@ internal fun Project.commonConfig(
         }
 
         configureFlavors(this) { flavor ->
-            if (enableFlavorSpecificValue) {
-                setFlavorSpecifiedValue(flavor)
-            }
+            setFlavorSpecifiedValue(flavor)
         }
     }
 
