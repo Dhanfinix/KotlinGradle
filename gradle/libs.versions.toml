@@ -12,8 +12,13 @@ composeBom = "2024.09.00"
 retrofit = "3.0.0"
 konvert = "4.3.2"
 ksp = "2.2.20-2.0.4"
+jetbrainsKotlinJvm = "2.0.21"
 
 [libraries]
+# used for convention plugin functionality
+android-gradlePlugin = { module = "com.android.tools.build:gradle", version.ref = "agp" }
+kotlin-gradlePlugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
+
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
@@ -33,11 +38,14 @@ konvert-api = { group = "io.mcarle", name = "konvert-api", version.ref = "konver
 konvert-processor = { group = "io.mcarle", name = "konvert-processor", version.ref = "konvert" }
 
 [plugins]
+# convention plugin used on build.gradle of a module
+app = {id = "kotlin.gradle.app"}
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 android-library = { id = "com.android.library", version.ref = "agp" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "jetbrainsKotlinJvm" }
 
 [bundles]
 compose = [

@@ -1,4 +1,5 @@
 pluginManagement {
+    includeBuild("build-logic")
     repositories {
         google {
             content {
@@ -19,7 +20,10 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Kotlin Gradle"
+rootProject.name = "KotlinGradle"
+
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
+
 include(":app")
 include(":core:data")
 include(":core:domain")
