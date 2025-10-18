@@ -24,5 +24,9 @@ gradlePlugin {
             id = libs.plugins.module.get().pluginId
             implementationClass = "ModulePlugin"
         }
+        register("nonUiPlugin"){
+            id = libs.plugins.non.ui.get().pluginId
+            implementationClass = "NonUiPlugin"
+        }
     }
 }

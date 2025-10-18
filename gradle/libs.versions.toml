@@ -41,6 +41,10 @@ konvert-processor = { group = "io.mcarle", name = "konvert-processor", version.r
 # convention plugin used on build.gradle of a module
 app = {id = "kotlin.gradle.app"}
 module = {id = "kotlin.gradle.module"}
+#module-no-ui = {id = "kotlin.gradle.module.no.ui"} ->> cause error two plugin starts with 'module"
+non-ui = {id = "kotlin.gradle.non.ui"}
+
+# normal plugin
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }

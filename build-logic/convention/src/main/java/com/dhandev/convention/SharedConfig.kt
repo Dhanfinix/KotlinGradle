@@ -18,6 +18,7 @@ import java.util.Properties
 /** Apply common plugin for application and feature module */
 internal fun Project.commonPlugin(
     isApp: Boolean,
+    isUi: Boolean
 ){
     with(pluginManager){
         if (isApp){
@@ -25,15 +26,17 @@ internal fun Project.commonPlugin(
         } else {
             apply(getPluginId("android-library"))
         }
+        if (isUi){
+            apply(getPluginId("kotlin-compose"))
+        }
         apply(getPluginId("kotlin-android"))
-        apply(getPluginId("ksp"))
-        apply(getPluginId("kotlin-compose"))
     }
 }
 
 /** Set common configuration for App module and feature module **/
 internal fun Project.commonConfig(
     commonExtension: CommonExtension<*, *, *, *, *, *>,
+    isUi: Boolean
 ) {
     commonExtension.apply {
         compileSdk = compileTargetSdk
@@ -49,7 +52,9 @@ internal fun Project.commonConfig(
         }
 
         buildFeatures {
-            compose = true
+            if (isUi){
+                compose = true
+            }
             buildConfig = true
         }
 
@@ -68,7 +73,7 @@ internal fun Project.commonConfig(
         }
     }
 
-    configureDependencies()
+    configureDependencies(isUi)
 }
 
 private fun Project.releaseConfig(
@@ -114,7 +119,7 @@ private fun Project.releaseConfig(
 }
 
 /** Set common libraries for all module */
-private fun Project.configureDependencies() {
+private fun Project.configureDependencies(isUi: Boolean) {
     dependencies {
         with(libs()) {
             // Core Compose dependencies
@@ -122,25 +127,28 @@ private fun Project.configureDependencies() {
             implementation(findLibrary("androidx-lifecycle-runtime-ktx").get())
             implementation(findLibrary("androidx-activity-compose").get())
 
-            // Compose BOM
-            implementation(platform(findLibrary("androidx-compose-bom").get()))
+            if (isUi){
+                // Compose BOM
+                implementation(platform(findLibrary("androidx-compose-bom").get()))
 
-            // Compose UI Bundle
-            implementation(findLibrary("androidx-compose-ui").get())
-            implementation(findLibrary("androidx-compose-ui-graphics").get())
-            implementation(findLibrary("androidx-compose-ui-tooling-preview").get())
-            implementation(findLibrary("androidx-compose-material3").get())
+                // Compose UI Bundle
+                implementation(findLibrary("androidx-compose-ui").get())
+                implementation(findLibrary("androidx-compose-ui-graphics").get())
+                implementation(findLibrary("androidx-compose-ui-tooling-preview").get())
+                implementation(findLibrary("androidx-compose-material3").get())
+
+                androidTestImplementation(platform(findLibrary("androidx-compose-bom").get()))
+                androidTestImplementation(findLibrary("androidx-compose-ui-test-junit4").get())
+
+                // Debug tools
+                debugImplementation(findLibrary("androidx-compose-ui-tooling").get())
+                debugImplementation(findLibrary("androidx-compose-ui-test-manifest").get())
+            }
 
             // Testing
             testImplementation(findLibrary("junit").get())
             androidTestImplementation(findLibrary("androidx-junit").get())
             androidTestImplementation(findLibrary("androidx-espresso-core").get())
-            androidTestImplementation(platform(findLibrary("androidx-compose-bom").get()))
-            androidTestImplementation(findLibrary("androidx-compose-ui-test-junit4").get())
-
-            // Debug tools
-            debugImplementation(findLibrary("androidx-compose-ui-tooling").get())
-            debugImplementation(findLibrary("androidx-compose-ui-test-manifest").get())
         }
     }
 }

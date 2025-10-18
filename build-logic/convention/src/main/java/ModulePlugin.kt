@@ -11,9 +11,9 @@ open class ModulePlugin: AppPlugin() {
     override val isApp = false
     override fun apply(target: Project) {
         with(target) {
-            commonPlugin(isApp)
+            commonPlugin(isApp, isUi)
             extensions.configure<LibraryExtension> {
-                commonConfig(this)
+                commonConfig(this, isUi)
                 defaultConfig.apply {
                     targetSdk = compileTargetSdk
                     consumerProguardFiles("consumer-rules.pro")
