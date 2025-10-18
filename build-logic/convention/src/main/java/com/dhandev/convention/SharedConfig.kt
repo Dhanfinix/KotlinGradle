@@ -22,14 +22,14 @@ internal fun Project.commonPlugin(
 ){
     with(pluginManager){
         if (isApp){
-            apply(getPluginId("android-application"))
+            alias(libs.plugins.android.application)
         } else {
-            apply(getPluginId("android-library"))
+            alias(libs.plugins.android.library)
         }
         if (isUi){
-            apply(getPluginId("kotlin-compose"))
+            alias(libs.plugins.kotlin.compose)
         }
-        apply(getPluginId("kotlin-android"))
+        alias(libs.plugins.kotlin.android)
     }
 }
 
