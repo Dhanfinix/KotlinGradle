@@ -1,5 +1,6 @@
 package com.dhandev.convention
 
+import org.gradle.accessors.dm.LibrariesForLibs
 import org.gradle.api.Project
 import org.gradle.api.artifacts.Dependency
 import org.gradle.api.artifacts.ExternalModuleDependency
@@ -7,6 +8,7 @@ import org.gradle.api.artifacts.MinimalExternalModuleDependency
 import org.gradle.api.artifacts.VersionCatalogsExtension
 import org.gradle.api.artifacts.dsl.DependencyHandler
 import org.gradle.api.provider.Provider
+import org.gradle.kotlin.dsl.accessors.runtime.extensionOf
 import org.gradle.kotlin.dsl.getByType
 
 internal fun DependencyHandler.testImplementation(dependencyNotation: Any): Dependency? =
@@ -19,7 +21,7 @@ internal fun DependencyHandler.implementation(
     dependencyNotation: Provider<MinimalExternalModuleDependency>,
     exclude: (ExternalModuleDependency.() -> Unit)? = null
 ): Dependency? {
-    val dep = add("implementation", dependencyNotation.get())
+    val dep = add("implementation", dependencyNotation)
     if (exclude != null && dep is ExternalModuleDependency) {
         dep.exclude()
     }
@@ -56,3 +58,6 @@ internal fun Project.version(alias: String): String =
 /** Get version number from version catalog with integer return **/
 internal fun Project.versionInt(alias: String): Int =
     libs().findVersion(alias).get().toString().toInt()
+
+val Project.libs
+    get(): LibrariesForLibs = extensionOf(this, "libs") as LibrariesForLibs

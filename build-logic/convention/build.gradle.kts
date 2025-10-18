@@ -1,3 +1,6 @@
+import org.gradle.initialization.DependenciesAccessors
+import org.gradle.kotlin.dsl.support.serviceOf
+
 plugins {
     `kotlin-dsl`
 }
@@ -13,6 +16,10 @@ kotlin {
 dependencies {
     compileOnly(libs.android.gradlePlugin)
     compileOnly(libs.kotlin.gradlePlugin)
+    // this made libs call possible inside the plugin, no need findLibrary
+    gradle.serviceOf<DependenciesAccessors>().classes.asFiles.forEach {
+        compileOnly(files(it.absolutePath))
+    }
 }
 gradlePlugin {
     plugins {
