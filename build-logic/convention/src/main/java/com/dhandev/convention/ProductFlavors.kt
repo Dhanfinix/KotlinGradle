@@ -5,8 +5,6 @@ import com.android.build.api.dsl.ApplicationProductFlavor
 import com.android.build.api.dsl.CommonExtension
 import com.android.build.api.dsl.ProductFlavor
 import com.android.build.api.dsl.VariantDimension
-import java.io.File
-import java.util.Properties
 
 @Suppress("EnumEntryName")
 enum class FlavorDimension {
@@ -39,10 +37,6 @@ enum class IdmFlavor(
         appId = TO_ID,
     ),
     prod(),
-}
-
-val mapsApiKeyProperties = Properties().apply {
-    load(File("local.properties").reader())
 }
 
 fun configureFlavors(

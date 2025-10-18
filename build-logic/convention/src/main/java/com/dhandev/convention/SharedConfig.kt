@@ -80,38 +80,22 @@ private fun Project.releaseConfig(
     configs: NamedDomainObjectContainer<out ApkSigningConfig>,
 ) {
     configs.create(BuildType.RELEASE.toString()) {
-        // ========================================
-        // Load signing credentials from key.properties file
-        // This file exists locally but is gitignored (not in remote repo)
-        // ========================================
         val keystoreProperties = Properties()
         val keystorePropertiesFile = rootProject.file("key.properties")
         if (keystorePropertiesFile.exists()) {
             keystorePropertiesFile.inputStream().use { keystoreProperties.load(it) }
         }
-
-        // ========================================
-        // Priority: -P command line flags (CI) > key.properties file (local dev)
-        //
-        // CI/CD Pipeline: Uses -PstorePassword, -PkeyPassword, etc. from command line
-        // Local Development: Falls back to key.properties file
-        // ========================================
-
         // Store password for the keystore
-        storePassword = (project.findProperty("storePassword") as? String)
-            ?: keystoreProperties.getProperty("storePassword")
+        storePassword = keystoreProperties.getProperty("storePassword")
 
         // Key password within the keystore
-        keyPassword = (project.findProperty("keyPassword") as? String)
-            ?: keystoreProperties.getProperty("keyPassword")
+        keyPassword = keystoreProperties.getProperty("keyPassword")
 
         // Alias name of the key in the keystore
-        keyAlias = (project.findProperty("keyAlias") as? String)
-            ?: keystoreProperties.getProperty("keyAlias")
+        keyAlias = keystoreProperties.getProperty("keyAlias")
 
         // Path to the keystore file
-        val storeFilePath = (project.findProperty("storeFile") as? String)
-            ?: keystoreProperties.getProperty("storeFile")
+        val storeFilePath = keystoreProperties.getProperty("storeFile")
         if (!storeFilePath.isNullOrEmpty()) {
             storeFile = file(storeFilePath)
         }

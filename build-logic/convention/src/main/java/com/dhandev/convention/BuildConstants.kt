@@ -27,16 +27,6 @@ const val APPS_TO_BUILD_NUMBER = 1
 const val APPS_PRODUCTION_BUILD_NUMBER = 1
 
 // ==============================================================================
-// DATABASE CONFIGURATION
-// ==============================================================================
-const val APPS_DB_VERSION = 1
-const val APPS_DB_PASS_PHRASE = "edtsB!ru2022"
-const val APPS_DB_NAME = "klikIdmAppDb"
-
-const val APPS_DB_V1_NAME = "RKStorage"
-const val APPS_DB_V1_VERSION = 1
-
-// ==============================================================================
 // API ENDPOINTS (HEX ENCODED)
 // ==============================================================================
 const val API_BASE_URL_STAGING = "www.google.com"

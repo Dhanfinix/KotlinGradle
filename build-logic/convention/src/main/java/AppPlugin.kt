@@ -9,14 +9,12 @@ import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
 
 /** Plugin for App module */
-open class AppPlugin: Plugin<Project> {
-    open val isApp = true
-    open val isUi = true
+class AppPlugin: Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
-            commonPlugin(isApp = isApp, isUi = isUi)
+            commonPlugin(isApp = true, isUi = true)
             extensions.configure<ApplicationExtension> {
-                commonConfig(this, isUi)
+                commonConfig(this, true)
                 defaultConfig.apply {
                     targetSdk = compileTargetSdk
                     versionName = "$APPS_VERSION"
